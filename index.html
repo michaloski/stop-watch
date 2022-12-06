@@ -1,0 +1,75 @@
+<body>
+    <style>
+        body{
+           
+   display:flex;
+  flex-direction:column;
+  align-items: center;
+
+  background-color: orangered;
+  font-size: 20px;
+  color: white;
+}
+.btn{
+  width: 100px;
+  height: 50px;
+  background-color: transparent;
+  color: white;
+  border: 1px solid white;
+  cursor: pointer;
+  transition: .5s;
+}
+.btn:hover{
+  background-color: white;
+  color: orangered;
+}
+    </style>
+    <span>STOPWATCH</span><br>
+    <span>JAVASCRIPT STOPWATCH</span>
+    <p>
+      <span class="seconds">00</span>:<span class="miliseconds">00</span>
+    </p>
+    <div class="button-container">
+      <button class="start btn">Start</button>
+      <button class="stop btn">Stop</button>
+      <button class="reset btn">Reset</button>
+    </div>
+
+    <script>
+
+const startBtn = document.querySelector('.start');
+const stopBtn = document.querySelector('.stop');
+const resetBtn = document.querySelector('.reset');
+let miliseconds = document.querySelector('.miliseconds');
+let seconds = document.querySelector('.seconds');
+
+let interval;
+startBtn.addEventListener('click', function(){
+  interval = setInterval(() => {
+    if(miliseconds.textContent > 99){
+        if(seconds.textContent < 9){
+            seconds.textContent = `0${+seconds.textContent + 1}`;
+        }else{
+            seconds.textContent = +seconds.textContent + 1
+        }
+        
+        miliseconds.textContent = '00';
+    }
+    miliseconds.textContent = +miliseconds.textContent + 1;
+  }, 10)
+})
+
+stopBtn.addEventListener('click', function(){
+    clearInterval(interval);
+})
+
+resetBtn.addEventListener('click', function(){
+    miliseconds.textContent = '00';
+    seconds.textContent = '00';
+    clearInterval(interval)
+})
+
+
+
+    </script>    
+  </body>
